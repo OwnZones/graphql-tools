@@ -13,7 +13,8 @@ var defaultMergedResolver = function (parent, args, context, info) {
     var responseKey = getResponseKeyFromInfo_1.getResponseKeyFromInfo(info);
     var errorResult = errors_1.getErrorsFromParent(parent, responseKey);
     if (errorResult.kind === 'OWN') {
-        throw error_1.locatedError(errorResult.error.originalError || new Error(errorResult.error.message), info.fieldNodes, graphql_1.responsePathAsArray(info.path));
+        throw error_1.locatedError(errorResult.error.originalError ||
+            new graphql_1.GraphQLError(errorResult.error.message, null, null, null, null, null, errorResult.error.extensions), info.fieldNodes, graphql_1.responsePathAsArray(info.path));
     }
     var result = parent[responseKey];
     // subscription result mapping
